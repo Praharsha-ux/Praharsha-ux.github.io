@@ -1,0 +1,4 @@
+Fonts used on this site, all under the SIL Open Font License 1.1 (https://openfontlicense.org):
+- Instrument Serif, by Instrument
+- Fredoka, by Milena Brandão and Hafontia (see OFL-Fredoka.txt)
+- Caveat, by Impallari Type (see OFL-Caveat.txt)

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>simple.things: small products for everyday life</title>
+<meta name="description" content="simple.things is a series of small, simple products that help with big days. Product 01: Doodlenote, free sticky notes for your Windows desktop.">
+<link rel="canonical" href="https://praharsha-ux.github.io/">
+<link rel="icon" type="image/png" href="doodlenote/img/favicon-32.png">
+<style>
+@font-face{font-family:"Instrument Serif";src:url(doodlenote/fonts/InstrumentSerif-Regular.woff) format("woff");font-display:swap}
+@font-face{font-family:"Fredoka";src:url(doodlenote/fonts/Fredoka.woff) format("woff");font-weight:300 700;font-display:swap}
+*{box-sizing:border-box;margin:0}
+body{min-height:100svh;background:#e8eee9;color:#1b2524;font-family:"Fredoka","Segoe UI",sans-serif;font-size:19px;line-height:1.55;display:grid;place-items:center;padding:40px 20px}
+main{width:min(720px,100%)}
+h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(48px,8vw,84px);line-height:1}
+p{margin-top:18px;color:#4e5d5a;max-width:46ch}
+a.card{margin-top:44px;display:grid;grid-template-columns:72px 1fr;gap:20px;align-items:center;padding:22px;border-radius:22px;background:#172c2c;color:#efe7d8;text-decoration:none}
+a.card img{width:72px;height:72px;border-radius:16px}
+a.card b{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:34px;display:block;line-height:1.1}
+a.card span{color:#b9c9c4;font-size:17px}
+a.card:hover{outline:3px solid #d4ad7c}
+:focus-visible{outline:3px solid #d4ad7c;outline-offset:3px}
+.next{margin-top:22px;font-size:16px}
+</style>
+</head>
+<body>
+<main>
+  <h1>simple.things</h1>
+  <p>Small, simple products that help with big days. Each one explores a different craft, and each one is made to be used every day.</p>
+  <a class="card" href="doodlenote/"><img src="doodlenote/img/app-icon.png" alt=""><div><b>Doodlenote</b><span>Product 01. Cute sticky notes for your Windows desktop. Free.</span></div></a>
+  <p class="next">Product 02 is on the way.</p>
+</main>
+</body>
+</html>

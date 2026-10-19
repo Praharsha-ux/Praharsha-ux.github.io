@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doodlenote: cute sticky notes app for your Windows desktop (free)</title>
+<meta name="description" content="Doodlenote is a free sticky notes app for Windows 10 and 11. Checklists with notes and steps, 20 looks, stickers and emoji. Works offline, no account, no tracking.">
+<link rel="canonical" href="https://praharsha-ux.github.io/doodlenote/">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="apple-touch-icon" href="img/favicon-128.png">
+<meta name="theme-color" content="#172c2c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Doodlenote: little notes for big days">
+<meta property="og:description" content="Free, cute sticky notes for your Windows desktop. Works offline, no account, no tracking.">
+<meta property="og:url" content="https://praharsha-ux.github.io/doodlenote/">
+<meta property="og:image" content="https://praharsha-ux.github.io/doodlenote/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Doodlenote","applicationCategory":"ProductivityApplication","operatingSystem":"Windows 10, Windows 11","softwareVersion":"1.0.0","fileSize":"3MB","downloadUrl":"https://praharsha-ux.github.io/doodlenote/download/Doodlenote_1.0.0_x64-setup.exe","image":"https://praharsha-ux.github.io/doodlenote/img/og.jpg","description":"Cute sticky notes that live on your Windows desktop: checklists with notes and steps, 20 looks, Auto-style, stickers, emoji and a Done list. Works offline.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<style>
+@font-face{font-family:"Instrument Serif";src:url(fonts/InstrumentSerif-Regular.woff) format("woff");font-display:swap}
+@font-face{font-family:"Instrument Serif";font-style:italic;src:url(fonts/InstrumentSerif-Italic.woff) format("woff");font-display:swap}
+@font-face{font-family:"Fredoka";src:url(fonts/Fredoka.woff) format("woff");font-weight:300 700;font-display:swap}
+@font-face{font-family:"Caveat";src:url(fonts/Caveat.woff) format("woff");font-display:swap}
+:root{
+  --desk:#172c2c; --moss:#21403e; --gold:#d4ad7c; --teal:#6fb0a8;
+  --mist:#e8eee9; --ink:#1b2524; --soft:#4e5d5a; --line:#c9d4cd;
+  --serif:"Instrument Serif",Georgia,serif; --round:"Fredoka","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--mist);color:var(--ink);font-family:var(--round);font-size:18px;line-height:1.55;font-weight:400;-webkit-font-smoothing:antialiased}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+
+/* top bar */
+.bar{position:absolute;inset:0 0 auto;z-index:5}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#efe7d8;font-family:var(--serif);font-size:30px;letter-spacing:.01em}
+.brand img{width:40px;height:40px;border-radius:10px}
+.bar .get{color:#efe7d8;font-weight:500;text-decoration:none;font-size:17px;padding:8px 16px;border:1.5px solid #ffffff38;border-radius:999px}
+.bar .get:hover{border-color:var(--gold);color:var(--gold)}
+
+/* hero: the desk */
+.desk{position:relative;background:var(--desk);color:#efe7d8;min-height:min(860px,100svh);overflow:hidden;
+  background-image:radial-gradient(#ffffff0d 1px,transparent 1px);background-size:22px 22px}
+.desk .wrap{position:relative;min-height:inherit;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;gap:40px;padding:120px 0 80px}
+.pitch h1{font-family:var(--serif);font-weight:400;font-size:clamp(56px,7.4vw,104px);line-height:.95;letter-spacing:-.015em;color:#f3ead9}
+.pitch p{margin-top:26px;font-size:21px;line-height:1.5;color:#c9d6d1;max-width:30ch}
+.cta{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--gold);color:#1d2120;text-decoration:none;font-weight:600;font-size:19px;padding:16px 26px;border-radius:16px;box-shadow:0 5px 0 #9c7a50;transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translateY(2px);box-shadow:0 3px 0 #9c7a50}
+.btn:active{transform:translateY(5px);box-shadow:0 0 0 #9c7a50}
+.btn svg{width:22px;height:22px}
+.fine{font-size:15px;color:#9fb3ad}
+
+.board{position:relative;height:620px}
+.note{position:absolute;width:300px;cursor:grab;touch-action:none;user-select:none;-webkit-user-drag:none;filter:drop-shadow(0 18px 26px #0006);transition:filter .15s}
+.note.drag{cursor:grabbing;filter:drop-shadow(0 30px 40px #0008);z-index:9}
+.note img{pointer-events:none;width:100%}
+.hint{position:absolute;font-family:"Caveat",cursive;font-size:30px;color:var(--gold);transform:rotate(-6deg);pointer-events:none}
+.hint svg{display:block;margin:2px 0 0 60px}
+
+/* demo */
+.demo{padding:120px 0}
+.demo .wrap{display:grid;grid-template-columns:1fr 360px;gap:70px;align-items:center}
+.sec-h{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5vw,64px);line-height:1.02;letter-spacing:-.01em}
+.lede{margin-top:20px;font-size:20px;color:var(--soft);max-width:44ch}
+.phone{border-radius:34px;overflow:hidden;background:var(--desk);border:10px solid var(--desk);box-shadow:0 30px 60px #172c2c40;aspect-ratio:9/16}
+.phone video{width:100%;height:100%;object-fit:cover}
+
+/* features: alternating rows, not cards */
+.feats{padding:20px 0 110px}
+.feat{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:60px;padding:46px 0;border-top:1px solid var(--line)}
+.feat:last-child{border-bottom:1px solid var(--line)}
+.feat figure{justify-self:center;width:min(330px,100%)}
+.feat figure img{filter:drop-shadow(0 16px 24px #172c2c33)}
+.feat:nth-child(even) figure{order:2}
+.feat h3{font-family:var(--serif);font-weight:400;font-size:clamp(34px,3.6vw,46px);line-height:1.05}
+.feat p{margin-top:14px;font-size:19px;color:var(--soft);max-width:38ch}
+
+/* privacy */
+.private{background:var(--desk);color:#efe7d8;padding:110px 0}
+.private .sec-h{color:#f3ead9;max-width:16ch}
+.promises{margin-top:50px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.promises h4{font-family:var(--round);font-weight:600;font-size:21px;color:var(--gold)}
+.promises p{margin-top:8px;color:#c2d0cb;font-size:18px}
+
+/* install */
+.install{padding:110px 0}
+.steps{margin-top:44px;list-style:none;counter-reset:s;display:grid;gap:0;max-width:760px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:64px 1fr;gap:18px;padding:24px 0;border-top:1px solid var(--line)}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(s);font-family:var(--serif);font-size:48px;line-height:1;color:var(--teal)}
+.steps b{font-weight:600}
+.steps p{color:var(--soft);margin-top:4px}
+.kbd{display:inline-block;padding:1px 9px;border-radius:7px;background:#fff;border:1px solid var(--line);font-weight:500;font-size:16px;color:var(--ink)}
+.install .btn{margin-top:44px}
+
+footer{background:var(--desk);color:#9fb3ad;padding:44px 0;font-size:16px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 30px;justify-content:space-between;align-items:center}
+footer .brand{font-size:24px}
+footer .brand img{width:32px;height:32px}
+
+@media (max-width:900px){
+  .desk .wrap{grid-template-columns:1fr;padding:110px 0 40px;gap:10px}
+  .board{height:460px;margin-top:10px}
+  .note{width:220px}
+  .demo .wrap{grid-template-columns:1fr;gap:40px}
+  .phone{width:min(330px,100%);justify-self:center}
+  .feat{grid-template-columns:1fr;gap:26px;padding:40px 0}
+  .feat:nth-child(even) figure{order:0}
+  .promises{grid-template-columns:1fr;gap:26px}
+  .demo,.install,.private{padding:80px 0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.note{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="img/app-icon.png" alt="" width="40" height="40">Doodlenote</a>
+    <a class="get" href="#install">Download</a>
+  </div>
+</header>
+
+<main>
+  <section class="desk" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="pitch">
+        <h1 id="hero-title">Little notes for big days.</h1>
+        <p>Cute sticky notes that live right on your Windows desktop. Checklists, tiny steps, twenty looks, and a Done list that keeps your wins.</p>
+        <div class="cta">
+          <a class="btn" href="download/Doodlenote_1.0.0_x64-setup.exe" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>
+            Download for Windows
+          </a>
+          <span class="fine">Free. About 3 MB. Windows 10 and 11.</span>
+        </div>
+      </div>
+      <div class="board" id="board" aria-label="Doodlenote notes you can drag around">
+        <div class="note" style="left:4%;top:8%;--r:-6deg"><img src="img/note-chalk.png" alt="A Chalkboard-style Doodlenote checklist"></div>
+        <div class="note" style="left:44%;top:0%;--r:5deg"><img src="img/note-jelly.png" alt="A pink Jelly-style daily plan note"></div>
+        <div class="note" style="left:24%;top:30%;--r:-1deg"><img src="img/note-garden.png" alt="A Garden-style to-do note with flowers growing along the bottom"></div>
+        <p class="hint" style="right:2%;bottom:4%">go on, move us around
+          <svg width="70" height="40" viewBox="0 0 70 40" fill="none" stroke="#d4ad7c" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M60 4C50 24 30 32 8 30M8 30l9-7M8 30l8 7"/></svg>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo" aria-labelledby="demo-title">
+    <div class="wrap">
+      <div>
+        <h2 class="sec-h" id="demo-title">See it in a minute and a half.</h2>
+        <p class="lede">Typing a brain dump, breaking a task into steps, switching looks, growing a little garden. The full tour, with sound.</p>
+      </div>
+      <div class="phone">
+        <video src="doodlenote-demo.mp4" poster="img/demo-poster.jpg" controls playsinline preload="none" aria-label="Doodlenote demo video"></video>
+      </div>
+    </div>
+  </section>
+
+  <section class="feats" aria-label="What Doodlenote does">
+    <div class="wrap">
+      <article class="feat">
+        <figure><img src="img/note-detail.png" alt="A task opened to show its notes and steps" loading="lazy"></figure>
+        <div><h3>Open any task, add the details.</h3><p>Every checklist item opens into notes and small steps, so the big stuff stays doable and nothing gets lost.</p></div>
+      </article>
+      <article class="feat">
+        <figure><img src="img/note-menu.png" alt="The new note menu with looks and templates" loading="lazy"></figure>
+        <div><h3>Pick a vibe, then a template.</h3><p>Start a to-do, daily plan, shopping list, meeting or ideas note in one click. New notes pop up right on top.</p></div>
+      </article>
+      <article class="feat">
+        <figure><img src="img/note-receipt.png" alt="A Receipt-style note stamped PAID" loading="lazy"></figure>
+        <div><h3>Twenty looks, or let Auto-style pick.</h3><p>From calm and classic to chalkboard, polaroid and receipt. Finish a Receipt list and your whole day gets stamped paid.</p></div>
+      </article>
+      <article class="feat">
+        <figure><img src="img/note-garden.png" alt="A Garden note where finished tasks grow flowers" loading="lazy"></figure>
+        <div><h3>Tick it off, watch it bloom.</h3><p>In the Garden look, every task you finish grows a little flower along the bottom of your note.</p></div>
+      </article>
+      <article class="feat">
+        <figure><img src="img/note-stickers.png" alt="A note decorated with a boba sticker, a flower and a 'you got this' sticker" loading="lazy"></figure>
+        <div><h3>Stickers, emoji and cute fonts.</h3><p>Decorate with stickers, hundreds of emoji, playful fonts and your own images until it feels like yours.</p></div>
+      </article>
+      <article class="feat">
+        <figure><img src="img/note-done.png" alt="The Done list showing finished tasks with times" loading="lazy"></figure>
+        <div><h3>Clear what's done, keep the wins.</h3><p>Finished tasks move to your Done list, off your desktop, so you can look back at everything you got through.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="private" aria-labelledby="private-title">
+    <div class="wrap">
+      <h2 class="sec-h" id="private-title">Your notes stay on your computer.</h2>
+      <div class="promises">
+        <div><h4>Works offline</h4><p>Doodlenote never connects to the internet. Everything happens on your PC.</p></div>
+        <div><h4>No account, no tracking</h4><p>No sign-up, no ads, no analytics. Nothing about you is collected.</p></div>
+        <div><h4>Daily backups</h4><p>A backup is saved to your Documents folder each day, and you can restore any of them.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="install" id="install" aria-labelledby="install-title">
+    <div class="wrap">
+      <h2 class="sec-h" id="install-title">Install in under a minute.</h2>
+      <ol class="steps">
+        <li><div><b>Download the installer.</b><p>Doodlenote_1.0.0_x64-setup.exe, about 3 MB.</p></div></li>
+        <li><div><b>Open it to install.</b><p>No admin rights needed. Doodlenote opens when it's done.</p></div></li>
+        <li><div><b>If Windows shows a blue warning, click <span class="kbd">More info</span> then <span class="kbd">Run anyway</span>.</b><p>Windows shows this for small indie apps that aren't code-signed yet. Doodlenote is safe and works fully offline.</p></div></li>
+      </ol>
+      <a class="btn" href="download/Doodlenote_1.0.0_x64-setup.exe" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>
+        Download for Windows
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="./"><img src="img/app-icon.png" alt="" width="32" height="32">Doodlenote</a>
+    <span>Version 1.0.0. Product 01 from <a href="../">simple.things</a>.</span>
+  </div>
+</footer>
+
+<script>
+// Drag the hero notes around, like real sticky notes.
+(() => {
+  const board = document.getElementById('board');
+  let z = 3;
+  board.querySelectorAll('.note').forEach((n) => {
+    n.style.transform = `rotate(${n.style.getPropertyValue('--r')})`;
+    n.tabIndex = 0;
+    n.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      const b = board.getBoundingClientRect(), r = n.getBoundingClientRect();
+      const dx = e.clientX - r.left, dy = e.clientY - r.top;
+      n.setPointerCapture(e.pointerId); n.classList.add('drag'); n.style.zIndex = ++z;
+      const move = (ev) => {
+        const x = Math.max(-r.width * .3, Math.min(b.width - r.width * .7, ev.clientX - b.left - dx));
+        const y = Math.max(-r.height * .2, Math.min(b.height - r.height * .5, ev.clientY - b.top - dy));
+        n.style.left = x + 'px'; n.style.top = y + 'px';
+      };
+      const up = () => { n.classList.remove('drag'); n.removeEventListener('pointermove', move); n.removeEventListener('pointerup', up); };
+      n.addEventListener('pointermove', move); n.addEventListener('pointerup', up);
+    });
+    // Keyboard: arrow keys nudge a focused note.
+    n.addEventListener('keydown', (e) => {
+      const k = { ArrowLeft: [-20, 0], ArrowRight: [20, 0], ArrowUp: [0, -20], ArrowDown: [0, 20] }[e.key];
+      if (!k) return; e.preventDefault(); n.style.zIndex = ++z;
+      n.style.left = (n.offsetLeft + k[0]) + 'px'; n.style.top = (n.offsetTop + k[1]) + 'px';
+    });
+  });
+})();
+</script>
+</body>
+</html>

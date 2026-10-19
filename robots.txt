@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://praharsha-ux.github.io/sitemap.xml
