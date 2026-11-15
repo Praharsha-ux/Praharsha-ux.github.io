@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Doodlenote: cute sticky notes app for your Windows desktop (free)</title>
-<meta name="description" content="Doodlenote is a free sticky notes app for Windows 10 and 11. Checklists with notes and steps, 20 looks, stickers and emoji. Works offline, no account, no tracking.">
+<title>Doodlenote: cute sticky notes app for Windows and Mac (free)</title>
+<meta name="description" content="Doodlenote is a free sticky notes app for Windows 10 and 11, with a Mac beta. Checklists with notes and steps, 20 looks, stickers and emoji. Works offline, no account, no tracking.">
 <link rel="canonical" href="https://praharsha-ux.github.io/doodlenote/">
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
 <link rel="apple-touch-icon" href="img/favicon-128.png">
 <meta name="theme-color" content="#172c2c">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Doodlenote: little notes for big days">
-<meta property="og:description" content="Free, cute sticky notes for your Windows desktop. Works offline, no account, no tracking.">
+<meta property="og:description" content="Free, cute sticky notes for your desktop, on Windows and Mac (beta). Works offline, no account, no tracking.">
 <meta property="og:url" content="https://praharsha-ux.github.io/doodlenote/">
 <meta property="og:image" content="https://praharsha-ux.github.io/doodlenote/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Doodlenote","applicationCategory":"ProductivityApplication","operatingSystem":"Windows 10, Windows 11","softwareVersion":"1.0.0","fileSize":"3MB","downloadUrl":"https://praharsha-ux.github.io/doodlenote/download/Doodlenote_1.0.0_x64-setup.exe","image":"https://praharsha-ux.github.io/doodlenote/img/og.jpg","description":"Cute sticky notes that live on your Windows desktop: checklists with notes and steps, 20 looks, Auto-style, stickers, emoji and a Done list. Works offline.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Doodlenote","applicationCategory":"ProductivityApplication","operatingSystem":"Windows 10, Windows 11, macOS","softwareVersion":"1.1.0","fileSize":"3MB","downloadUrl":"https://praharsha-ux.github.io/doodlenote/download/Doodlenote_1.1.0_x64-setup.exe","image":"https://praharsha-ux.github.io/doodlenote/img/og.jpg","description":"Cute sticky notes that live on your desktop, on Windows and Mac: checklists with notes and steps, 20 looks, Auto-style, stickers, emoji and a Done list. Works offline.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 <style>
 @font-face{font-family:"Instrument Serif";src:url(fonts/InstrumentSerif-Regular.woff) format("woff");font-display:swap}
@@ -55,6 +55,9 @@ a{color:inherit}
 .btn:hover{transform:translateY(2px);box-shadow:0 3px 0 #9c7a50}
 .btn:active{transform:translateY(5px);box-shadow:0 0 0 #9c7a50}
 .btn svg{width:22px;height:22px}
+.btn.alt{background:transparent;color:#efe7d8;border:2px solid #ffffff55;box-shadow:none;padding:14px 24px}
+.btn.alt:hover{border-color:var(--gold);color:var(--gold);transform:none}
+.tag{font-family:var(--round);vertical-align:middle;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:#ffffff1f}
 .fine{font-size:15px;color:#9fb3ad}
 
 .board{position:relative;height:620px}
@@ -98,7 +101,13 @@ a{color:inherit}
 .steps b{font-weight:600}
 .steps p{color:var(--soft);margin-top:4px}
 .kbd{display:inline-block;padding:1px 9px;border-radius:7px;background:#fff;border:1px solid var(--line);font-weight:500;font-size:16px;color:var(--ink)}
-.install .btn{margin-top:44px}
+.install .btn{margin-top:28px}
+.install .btn.alt{color:var(--ink);border-color:var(--line)}
+.install .btn.alt:hover{border-color:var(--teal);color:var(--ink)}
+.install .btn.alt .tag{background:var(--mist)}
+.install h3{font-family:var(--serif);font-weight:400;font-size:34px;margin-top:52px}
+.install h3+.steps{margin-top:16px}
+.install .note-mac{margin-top:18px;color:var(--soft);max-width:760px}
 
 footer{background:var(--desk);color:#9fb3ad;padding:44px 0;font-size:16px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px 30px;justify-content:space-between;align-items:center}
@@ -133,13 +142,17 @@ footer .brand img{width:32px;height:32px}
     <div class="wrap">
       <div class="pitch">
         <h1 id="hero-title">Little notes for big days.</h1>
-        <p>Cute sticky notes that live right on your Windows desktop. Checklists, tiny steps, twenty looks, and a Done list that keeps your wins.</p>
+        <p>Cute sticky notes that live right on your desktop. Checklists, tiny steps, twenty looks, and a Done list that keeps your wins.</p>
         <div class="cta">
-          <a class="btn" href="download/Doodlenote_1.0.0_x64-setup.exe" download>
+          <a class="btn" href="download/Doodlenote_1.1.0_x64-setup.exe" download>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>
             Download for Windows
           </a>
-          <span class="fine">Free. About 3 MB. Windows 10 and 11.</span>
+          <a class="btn alt" href="download/Doodlenote_1.1.0_universal.dmg" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>
+            Download for Mac <span class="tag">beta</span>
+          </a>
+          <span class="fine">Free. Windows 10 and 11, about 3 MB. Mac beta for Apple Silicon and Intel, about 7 MB.</span>
         </div>
       </div>
       <div class="board" id="board" aria-label="Doodlenote notes you can drag around">
@@ -198,7 +211,7 @@ footer .brand img{width:32px;height:32px}
     <div class="wrap">
       <h2 class="sec-h" id="private-title">Your notes stay on your computer.</h2>
       <div class="promises">
-        <div><h4>Works offline</h4><p>Doodlenote never connects to the internet. Everything happens on your PC.</p></div>
+        <div><h4>Works offline</h4><p>Doodlenote never connects to the internet. Everything happens on your computer.</p></div>
         <div><h4>No account, no tracking</h4><p>No sign-up, no ads, no analytics. Nothing about you is collected.</p></div>
         <div><h4>Daily backups</h4><p>A backup is saved to your Documents folder each day, and you can restore any of them.</p></div>
       </div>
@@ -208,14 +221,28 @@ footer .brand img{width:32px;height:32px}
   <section class="install" id="install" aria-labelledby="install-title">
     <div class="wrap">
       <h2 class="sec-h" id="install-title">Install in under a minute.</h2>
+      <h3>On Windows</h3>
       <ol class="steps">
-        <li><div><b>Download the installer.</b><p>Doodlenote_1.0.0_x64-setup.exe, about 3 MB.</p></div></li>
+        <li><div><b>Download the installer.</b><p>Doodlenote_1.1.0_x64-setup.exe, about 3 MB.</p></div></li>
         <li><div><b>Open it to install.</b><p>No admin rights needed. Doodlenote opens when it's done.</p></div></li>
         <li><div><b>If Windows shows a blue warning, click <span class="kbd">More info</span> then <span class="kbd">Run anyway</span>.</b><p>Windows shows this for small indie apps that aren't code-signed yet. Doodlenote is safe and works fully offline.</p></div></li>
       </ol>
-      <a class="btn" href="download/Doodlenote_1.0.0_x64-setup.exe" download>
+      <a class="btn" href="download/Doodlenote_1.1.0_x64-setup.exe" download>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>
         Download for Windows
+      </a>
+
+      <h3>On a Mac <span class="tag">beta</span></h3>
+      <ol class="steps">
+        <li><div><b>Download the disk image.</b><p>Doodlenote_1.1.0_universal.dmg, about 7 MB. One file for both Apple Silicon and Intel Macs.</p></div></li>
+        <li><div><b>Open it and drag Doodlenote into Applications.</b><p>Then open Doodlenote from Applications. It lives in the menu bar at the top of the screen, not the Dock.</p></div></li>
+        <li><div><b>If macOS says it can't check the app, open <span class="kbd">System Settings</span> then <span class="kbd">Privacy &amp; Security</span>, and click <span class="kbd">Open Anyway</span>.</b><p>Macs show this for small indie apps that aren't signed by Apple yet. You only do it once.</p></div></li>
+        <li><div><b>If macOS asks to use your Documents folder, click <span class="kbd">Allow</span>.</b><p>That's where your daily backups are saved.</p></div></li>
+      </ol>
+      <p class="note-mac">The Mac version is brand new and still in beta, so a few things may look a little different from Windows.</p>
+      <a class="btn alt" href="download/Doodlenote_1.1.0_universal.dmg" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>
+        Download for Mac <span class="tag">beta</span>
       </a>
     </div>
   </section>
@@ -224,7 +251,7 @@ footer .brand img{width:32px;height:32px}
 <footer>
   <div class="wrap">
     <a class="brand" href="./"><img src="img/app-icon.png" alt="" width="32" height="32">Doodlenote</a>
-    <span>Version 1.0.0. Product 01 from <a href="../">simple.things</a>.</span>
+    <span>Version 1.1.0. Product 01 from <a href="../">simple.things</a>.</span>
   </div>
 </footer>
 
